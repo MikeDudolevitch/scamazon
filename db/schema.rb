@@ -13,12 +13,12 @@
 ActiveRecord::Schema.define(version: 2021_04_14_182710) do
 
   create_table "carts", force: :cascade do |t|
-    t.integer "item_id_id", null: false
-    t.integer "order_id_id", null: false
+    t.integer "item_id", null: false
+    t.integer "order_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["item_id_id"], name: "index_carts_on_item_id_id"
-    t.index ["order_id_id"], name: "index_carts_on_order_id_id"
+    t.index ["item_id"], name: "index_carts_on_item_id"
+    t.index ["order_id"], name: "index_carts_on_order_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -34,10 +34,10 @@ ActiveRecord::Schema.define(version: 2021_04_14_182710) do
   create_table "orders", force: :cascade do |t|
     t.decimal "total"
     t.boolean "payment_received"
-    t.integer "user_id_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id_id"], name: "index_orders_on_user_id_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_182710) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "carts", "item_ids"
-  add_foreign_key "carts", "order_ids"
-  add_foreign_key "orders", "user_ids"
+  add_foreign_key "carts", "items"
+  add_foreign_key "carts", "orders"
+  add_foreign_key "orders", "users"
 end
